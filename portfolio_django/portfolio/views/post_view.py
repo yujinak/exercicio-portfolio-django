@@ -1,8 +1,6 @@
-from django.http import HttpResponse
 from django.views import generic
-
-
+from portfolio.models import Post
 
 class PostView(generic.View):
-    def get(self, request, *args, **kwargs):
-        return HttpResponse("<h1 style='color:blue'>Olá, Mundo!</h1>")
+    queryset = Post.objects.filter(status=1).order_by('-created_on')
+    template_name = 'index.html'
